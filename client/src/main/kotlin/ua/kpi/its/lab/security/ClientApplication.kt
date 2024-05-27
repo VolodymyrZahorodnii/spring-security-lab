@@ -28,7 +28,7 @@ fun main(args: Array<String>) = application {
     val windowState = rememberWindowState(
         position = WindowPosition(Alignment.Center),
         width = 576.dp,
-        height = 1024.dp,
+        height = 768.dp,
     )
     val client = http
     Window(

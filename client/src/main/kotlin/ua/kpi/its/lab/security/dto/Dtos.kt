@@ -1,5 +1,8 @@
 package ua.kpi.its.lab.security.dto
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class SatelliteRequest(
     var name: String,
     var country: String,
@@ -11,6 +14,7 @@ data class SatelliteRequest(
     var processor: ProcessorRequest
 )
 
+@Serializable
 data class SatelliteResponse(
     var id: Long,
     var name: String,
@@ -23,6 +27,7 @@ data class SatelliteResponse(
     var processor: ProcessorResponse
 )
 
+@Serializable
 data class ProcessorRequest(
     var name: String,
     var manufacturer: String,
@@ -33,6 +38,7 @@ data class ProcessorRequest(
     var mmxSupport: Boolean
 )
 
+@Serializable
 data class ProcessorResponse(
     var id: Long,
     var name: String,

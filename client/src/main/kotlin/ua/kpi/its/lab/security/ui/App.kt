@@ -1,6 +1,7 @@
 package ua.kpi.its.lab.security.ui
 
 import androidx.compose.animation.Crossfade
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -9,21 +10,35 @@ import ua.kpi.its.lab.security.ui.login.LoginScreen
 import ua.kpi.its.lab.security.ui.main.MainScreen
 
 @Composable
+@Preview
 fun App() {
     var token by remember { mutableStateOf("") }
-    Scaffold(topBar = {
-        if (token.isNotBlank()) {
-            AppBar()
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    Scaffold(
+        topBar = {
+            if (token.isNotBlank()) {
+                AppBar()
+            }
+        },
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
         }
-    }) { innerPadding ->
+    ) { innerPadding ->
         Crossfade(
             targetState = token,
             modifier = Modifier.padding(innerPadding)
         ) { t ->
             if (t.isBlank()) {
-                LoginScreen { token = it }
+                LoginScreen(
+                    snackbarHostState,
+                    updateToken = { token = it },
+                )
             } else {
-                MainScreen(t)
+                MainScreen(
+                    snackbarHostState,
+                    token = t
+                )
             }
         }
     }
